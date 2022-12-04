@@ -92,4 +92,23 @@ Thank you.
             $dateTimeClass::createFromFormat('Y-m-d H:i', '2018-02-01 18:00', new DateTimeZone('UTC'))
         )->description($description)->address('Party Lane 1A, 1337 Funtown');
     }
+
+    protected function createMultipleAttendeesEventLink(bool $immutable = false): Link
+    {
+        $description = 'Staff Meeting.';
+
+        $attendees = [
+            'test@example.com',
+            'example@test.com'
+        ];
+
+        /** @var \DateTimeInterface $dateTimeClass */
+        $dateTimeClass = $immutable ? DateTimeImmutable::class : DateTime::class;
+
+        return Link::create(
+            'Meeting',
+            $dateTimeClass::createFromFormat('Y-m-d H:i', '2022-02-01 08:00', new DateTimeZone('UTC')),
+            $dateTimeClass::createFromFormat('Y-m-d H:i', '2022-02-01 10:00', new DateTimeZone('UTC'))
+        )->description($description)->address('Office Lane 1A, 1337 NoFuntown')->attendees($attendees);
+    }
 }

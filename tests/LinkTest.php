@@ -72,4 +72,17 @@ Bring a dog, bring a frog';
 
         $this->assertEquals('Party Lane 1A, 1337 Funtown', $link->address);
     }
+
+    /** @test */
+    public function it_can_have_attendees()
+    {
+        $link = $this->createMultipleAttendeesEventLink();
+
+        $correctAttendees = [
+            'test@example.com',
+            'example@test.com'
+        ];
+
+        $this->assertEquals($correctAttendees, $link->attendees);
+    }
 }
