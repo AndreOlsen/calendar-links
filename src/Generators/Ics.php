@@ -53,6 +53,12 @@ class Ics implements Generator
             $url[] = 'LOCATION:'.$this->escapeString($link->address);
         }
 
+        if ($link->attendees) {
+            foreach($link->attendees as $attendee) {
+                $url[] = 'ATTENDEE:'.$this->escapeString($attendee);
+            }
+        }
+
         if (isset($this->options['URL'])) {
             $url[] = 'URL;VALUE=URI:'.$this->options['URL'];
         }

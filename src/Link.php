@@ -16,6 +16,7 @@ use Spatie\CalendarLinks\Generators\Yahoo;
  * @property-read string $description
  * @property-read string $address
  * @property-read bool $allDay
+ * @property-read string $attendees
  */
 class Link
 {
@@ -36,6 +37,9 @@ class Link
 
     /** @var string */
     protected $address;
+
+    /** @var array */
+    protected $attendees;
 
     public function __construct(string $title, \DateTimeInterface $from, \DateTimeInterface $to, bool $allDay = false)
     {
@@ -100,6 +104,22 @@ class Link
     public function address(string $address)
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @param array|string $attendees
+     *
+     * @return $this
+     */
+    public function attendees(array|string $attendees)
+    {
+        if(!is_array($attendees)) {
+            $attendees = explode(',', $attendees);
+        }
+
+        $this->attendees = $attendees;
 
         return $this;
     }

@@ -46,6 +46,11 @@ abstract class BaseOutlook implements Generator
             $url .= '&location='.$this->sanitizeString($link->address);
         }
 
+        if ($link->attendees) {
+            $attendees = implode(',', $link->attendees);
+            $url .= '&to='.urlencode($this->sanitizeString($attendees));
+        }
+
         return $url;
     }
 

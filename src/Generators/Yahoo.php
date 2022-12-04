@@ -43,6 +43,11 @@ class Yahoo implements Generator
             $url .= '&in_loc='.$this->sanitizeText($link->address);
         }
 
+        if ($link->attendees) {
+            $attendees = implode(',', $link->attendees);
+            $url .= '&inv_list='.urlencode($this->sanitizeText($attendees));
+        }
+
         return $url;
     }
 
